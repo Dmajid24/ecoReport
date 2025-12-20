@@ -1,36 +1,35 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold">Manajemen User</h2>
-    </x-slot>
+    <div class="container py-4">
+        <h2 class="mb-3">Manajemen User</h2>
 
-    <div class="bg-white dark:bg-gray-800 p-6 rounded shadow">
-        <a href="{{ route('users.create') }}" 
-           class="px-4 py-2 bg-blue-600 text-white rounded mb-4 inline-block">
-            Tambah User
-        </a>
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
-        <table class="w-full text-left border mt-4">
+        <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Tambah User</a>
+
+        <table class="table table-striped">
             <thead>
-                <tr class="border-b">
-                    <th class="py-2 px-3">Nama</th>
-                    <th class="py-2 px-3">Email</th>
-                    <th class="py-2 px-3">Role</th>
-                    <th class="py-2 px-3">Aksi</th>
+                <tr>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($users as $u)
-                <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <td class="py-2 px-3">{{ $u->name }}</td>
-                    <td class="py-2 px-3">{{ $u->email }}</td>
-                    <td class="py-2 px-3">{{ $u->role }}</td>
-                    <td class="py-2 px-3 flex gap-2">
-                        <a href="{{ route('users.edit', $u->id) }}" class="text-yellow-600">Edit</a>
+                <tr>
+                    <td>{{ $u->name }}</td>
+                    <td>{{ $u->email }}</td>
+                    <td>{{ ucfirst($u->role) }}</td>
+                    <td>
+                        <a href="{{ route('users.edit', $u->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
-                        <form action="{{ route('users.destroy', $u->id) }}" method="POST">
+                        <form action="{{ route('users.destroy', $u->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button onclick="return confirm('Yakin hapus?')" class="text-red-600">
+                            <button onclick="return confirm('Hapus user?')" class="btn btn-sm btn-danger">
                                 Hapus
                             </button>
                         </form>
@@ -40,8 +39,6 @@
             </tbody>
         </table>
 
-        <div class="mt-3">
-            {{ $users->links() }}
-        </div>
+        {{ $users->links() }}
     </div>
 </x-app-layout>

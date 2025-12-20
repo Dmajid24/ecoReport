@@ -67,7 +67,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('users.index')->with('success', 'User updated!');
+        return redirect()->route('users.index')->with('success','User berhasil diperbarui.');
     }
 
     public function destroy(User $user)
@@ -76,9 +76,9 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success','User berhasil dihapus.');
     }
 
-    public function show(User $users)
+    public function show(User $user)
     {
-        return view('users.index', compact('users'));
+        return "Detail user: $user->name";
     }
         
 }

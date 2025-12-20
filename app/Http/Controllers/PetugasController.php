@@ -7,15 +7,12 @@ use App\Models\Report;
 class PetugasController extends Controller
 {
     public function index()
-    {   
-        $reports = Report::all();
-        return view('petugas.index', compact('reports'));
+    {
+        return "Halaman petugas - daftar laporan";
     }
 
     public function updateStatus($id)
-    {   
-        $report = Report::findOrFail($id);
-        $report->update(['status' => 'on_progress']);
-        return redirect()->back()->with('success', 'Status laporan berhasil diperbarui');
+    {
+        return "Update status laporan ID: $id";
     }
 }

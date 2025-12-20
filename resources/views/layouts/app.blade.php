@@ -28,17 +28,9 @@
             @endisset
 
             <!-- Page Content -->
-            <!-- Page Content -->
-        <main>
-            <div class="flex">
-                @include('components.sidebar')
-
-                <div class="flex-1 p-4">
-                    {{ $slot }}
-                </div>
-            </div>
-        </main>
-
+            <main>
+                {{ $slot }}
+            </main>
         </div>
     </body>
 </html>

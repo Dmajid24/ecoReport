@@ -10,28 +10,23 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::disableForeignKeyConstraints();
+    {
+        Schema::create('reports', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->text('description');
+            $table->string('photo_before')->nullable();
+            $table->string('status')->default('pending'); // pending, in_progress, done
+            $table->timestamps();
+        });
+    }
 
-    Schema::create('reports', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-        $table->foreignId('category_id')->constrained()->cascadeOnDelete();
-        $table->string('title');
-        $table->text('description')->nullable();
-        $table->text('location');
-        $table->string('photo_before')->nullable();
-        $table->string('status')->default('pending');
-        $table->timestamps();
-    });
-
-    Schema::enableForeignKeyConstraints();
-}
-
-public function down(): void
-{
-    Schema::disableForeignKeyConstraints();
-    Schema::dropIfExists('reports');
-    Schema::enableForeignKeyConstraints();
-}
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('reports');
+    }
 };

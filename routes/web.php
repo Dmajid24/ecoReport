@@ -21,7 +21,6 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware(['auth', 'role:student'])->group(function () {
     Route::resource('reports', ReportController::class);
-
 });
 
 Route::middleware(['auth', 'role:petugas'])->group(function () {

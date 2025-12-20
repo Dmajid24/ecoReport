@@ -1,42 +1,53 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold">Edit User</h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <form action="{{ route('users.update', $user) }}" method="POST" class="bg-white dark:bg-gray-800 p-6 rounded shadow">
+@section('content')
+<div class="container py-4">
+    <h2>Edit User</h2>
+
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach($errors->all() as $err)
+                    <li>{{ $err }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('users.update', $user->id) }}" method="POST">
         @csrf
         @method('PUT')
 
         <div class="mb-3">
-            <label class="font-semibold">Nama</label>
-            <input type="text" name="name" class="w-full p-2 border rounded" value="{{ $user->name }}">
+            <label class="form-label">Nama</label>
+            <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}" required>
         </div>
 
         <div class="mb-3">
-            <label class="font-semibold">Email</label>
-            <input type="email" name="email" class="w-full p-2 border rounded" value="{{ $user->email }}">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" value="{{ old('email', $user->email) }}" required>
         </div>
 
         <div class="mb-3">
-            <label class="font-semibold">Role</label>
-            <select name="role" class="w-full p-2 border rounded">
-                <option value="student" {{ $user->role == 'student' ? 'selected' : '' }}>Student</option>
-                <option value="petugas" {{ $user->role == 'petugas' ? 'selected' : '' }}>Petugas</option>
-                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="superadmin" {{ $user->role == 'superadmin' ? 'selected' : '' }}>Super Admin</option>
+            <label class="form-label">Role</label>
+            <select name="role" class="form-control" required>
+                @foreach($roles as $r)
+                    <option value="{{ $r }}" {{ (old('role', $user->role) == $r) ? 'selected' : '' }}>{{ ucfirst($r) }}</option>
+                @endforeach
             </select>
         </div>
 
         <div class="mb-3">
-            <label class="font-semibold">Password (kosongkan jika tidak ganti)</label>
-            <input type="password" name="password" class="w-full p-2 border rounded">
+            <label class="form-label">Password Baru (kosongkan jika tidak ingin mengganti)</label>
+            <input type="password" name="password" class="form-control">
         </div>
 
         <div class="mb-3">
-            <label class="font-semibold">Konfirmasi Password</label>
-            <input type="password" name="password_confirmation" class="w-full p-2 border rounded">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" name="password_confirmation" class="form-control">
         </div>
 
-        <button class="px-4 py-2 bg-blue-600 text-white rounded">Simpan</button>
+        <button class="btn btn-primary">Update</button>
     </form>
-</x-app-layout>
+</div>
+@endsection

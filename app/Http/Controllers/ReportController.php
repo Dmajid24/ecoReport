@@ -3,100 +3,62 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Report;
-use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'location' => 'required',
-            'category_id' => 'required|exists:categories,id',
-            'photo_before' => 'image|mimes:jpg,png,jpeg|max:2048'
-        ]);
-
-        $path = $request->file('photo_before') ? $request->file('photo_before')->store('Report') : null;
-
-        $Report = Report::create([
-            'user_id' => auth()->id(),
-            'title' => $request->title,
-            'description' => $request->description,
-            'location' => $request->location,
-            'category_id' => $request->category_id,
-            'photo_before' => $path,
-            'status' => 'pending',
-        ]);
-
-        return redirect()->route('reports.index')->with('success', 'Laporan berhasil dibuat');
-    }
-
-
     public function index()
-    {   
-        $report= Report::with('user')->latest()->get();
-        return view('reports.index',compact('report'));
+    {
+        return "Report index";
     }
 
-    public function show($id)
-    {   
-        $reports=Report::with('user')->findOrFail($id);
-        return view('reports.show',compact('reports'));
-    }
-
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        $categories = \App\Models\Category::all();
-        return view('reports.create', compact('categories'));
-        
+        //
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
-        $Report = Report::findOrFail($id);
-
-        $Report->update($request->only('title','description','location'));
-
-        return response()->json(['msg' => 'Updated', 'data' => $Report]);
+        //
     }
 
-    public function destroy($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
-        $Report = Report::findOrFail($id);
-        if ($Report->photo_before) {
-            Storage::delete($Report->photo_before);
-        }
-        $Report->delete();
-
-        return response()->json(['msg' => 'Deleted']);
+        //
     }
 
-    public function updateStatus(Request $request, $id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
-        $request->validate(['status' => 'required|in:pending,on_progress,done']);
-
-        $Report = Report::findOrFail($id);
-        $Report->update(['status' => $request->status]);
-
-        return response()->json(['msg' => 'Status updated', 'status' => $Report->status]);
+        //
     }
 
-    // public function uploadBukti(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'foto_bukti' => 'required|image|mimes:jpg,png,jpeg|max:2048'
-    //     ]);
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
 
-    //     $Report = Report::findOrFail($id);
-    //     $path = $request->file('foto_bukti')->store('bukti');
-
-    //     $Report->update(['foto_bukti' => $path, 'status' => 'done']);
-
-    //     return response()->json(['msg' => 'Bukti uploaded']);
-    // }
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
 }
