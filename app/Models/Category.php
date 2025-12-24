@@ -1,16 +1,19 @@
+<?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 
 class Category extends Model
 {
-    protected $table = 'categories';
-    protected $primaryKey = 'idCategory';
-    public $incrementing = false;
-    protected $keyType = 'string';
-
     protected $fillable = [
-        'idCategory',
-        'name'
+        'name',
     ];
+
+    // Relasi: 1 kategori punya banyak report
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
 }
