@@ -6,7 +6,6 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\LocationController;
 
 
 
