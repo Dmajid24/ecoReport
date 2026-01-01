@@ -1,0 +1,48 @@
+.logo{
+    width: 70px;
+}
+body{
+    background-color: #f8f9fa;
+}
+header{
+    background-color: #bfc0c2;
+    padding: 10px 0;
+}
+
+.create-btn{
+    background-color: #356335;
+    color: #ffffff;
+    width: 300px    ;
+    padding: 10px 25px;
+    align-content: center;
+    text-align: center;
+}
+
+.create-btn a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    display: block;
+}
+.link-dash{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.btn-sub{
+    text-decoration: none;
+    color: #000000;
+}
+
+.link-prof{
+    text-decoration: none;
+    color: #000000;
+}
+
+.add-btn{
+    text-decoration: none;
+}
+
+.add-btn a{
+    text-decoration: none;
+}
