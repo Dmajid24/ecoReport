@@ -18,9 +18,9 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-
         'name',
         'email',
+        'role',
         'password',
     ];
 
@@ -50,5 +50,17 @@ class User extends Authenticatable
     {
         return $this->role === $role;
     }
+
+    public function redirectTo()
+{
+    return match ($this->role) {
+        'student' => route('reports.index'),
+        'petugas' => url('/petugas/reports'),
+        'admin' => route('categories.index'),
+        'superadmin' => route('users.index'),
+        default => '/login',
+    };
+}
+
     
 }

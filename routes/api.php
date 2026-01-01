@@ -1,17 +1,18 @@
-use App\Http\Controllers\LaporanController;
+<?php
+use App\Http\Controllers\ReportController;
 
 
 Route::middleware('auth:sanctum')->group(function () {
-Route::get('/laporan', [LaporanController::class, 'index']);
-Route::get('/laporan/{id}', [LaporanController::class, 'show']);
+Route::get('/laporan', [ReportController::class, 'index']);
+Route::get('/laporan/{id}', [ReportController::class, 'show']);
 
 
 // Student
-Route::post('/laporan', [LaporanController::class, 'store']);
-Route::put('/laporan/{id}', [LaporanController::class, 'update']);
-Route::delete('/laporan/{id}', [LaporanController::class, 'destroy']);
+Route::post('/laporan', [ReportController::class, 'store']);
+Route::put('/laporan/{id}', [ReportController::class, 'update']);
+Route::delete('/laporan/{id}', [ReportController::class, 'destroy']);
 
 
 // Petugas/Admin
-Route::patch('/laporan/{id}/status', [LaporanController::class, 'updateStatus']);
+Route::patch('/laporan/{id}/status', [ReportController::class, 'updateStatus']);
 });
