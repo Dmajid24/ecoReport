@@ -20,8 +20,8 @@
 
             {{-- STAT CARD --}}
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow">
-                    <p class="text-sm text-gray-500 dark:text-black-400">Total Kategori</p>
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <p class="text-sm text-black">Total Kategori</p>
                     <p class="text-2xl font-bold text-gray-800 dark:text-black-100">
                         {{ $categories->count() }}
                     </p>

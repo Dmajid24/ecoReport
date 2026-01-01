@@ -23,8 +23,9 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:petugas'])->group(function () {
-    Route::get('/petugas/reports', [PetugasController::class, 'index']);
-    Route::post('/petugas/reports/{id}/update-status', [PetugasController::class, 'updateStatus']);
+    Route::get('/petugas/reports', [PetugasController::class, 'index'])->name('petugas.index');
+    Route::get('/petugas/reports/{id}', [PetugasController::class, 'show'])->name('petugas.show');
+    Route::put('/petugas/reports/{id}/update-status', [PetugasController::class, 'updateStatus'])->name('petugas.updateStatus');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

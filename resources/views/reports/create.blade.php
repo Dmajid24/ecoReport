@@ -1,8 +1,8 @@
 <x-app-layout>
-    <div class="max-w-3xl mx-auto mt-8 bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+    <div class="max-w-3xl mx-auto mt-8 bg-green-800 shadow rounded-lg p-6">
         
         {{-- Title --}}
-        <h2 class="text-xl font-semibold text-black-800 dark:text-black-100 mb-6">
+        <h2 class="text-xl font-semibold text-white mb-6">
             Create Environmental Report
         </h2>
 
@@ -11,7 +11,7 @@
 
             {{-- Report Title --}}
             <div>
-                <label class="block text-sm font-medium text-black-700 dark:text-black-300 mb-1">
+                <label class="block text-sm font-medium text-white mb-1">
                     Report Title
                 </label>
                 <input 
@@ -25,7 +25,7 @@
 
             {{-- Issue Category --}}
             <div>
-                <label class="block text-sm font-medium text-black-700 dark:text-black-300 mb-1">
+                <label class="block text-sm font-medium text-white mb-1">
                     Issue Category
                 </label>
                 <select 
@@ -43,7 +43,7 @@
 
             {{-- Campus Location --}}
             <div>
-                <label class="block text-sm font-medium text-black-700 dark:text-black-300 mb-1">
+                <label class="block text-sm font-medium text-white mb-1">
                     Campus Location
                 </label>
                 <input 
@@ -57,7 +57,7 @@
 
             {{-- Description --}}
             <div>
-                <label class="block text-sm font-medium text-black-700 dark:text-black-300 mb-1">
+                <label class="block text-sm font-medium text-white mb-1">
                     Description
                 </label>
                 <textarea 
@@ -70,13 +70,13 @@
 
             {{-- Upload Photo --}}
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
+                <label class="block text-sm font-medium text-white mb-2">
                     Upload Photo
                 </label>
             
                 <label
                     for="photo_before"
-                    class="flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 cursor-pointer hover:bg-gray-50"
+                    class="flex flex-col bg-white items-center justify-center border-2 border-dashed rounded-lg p-6 cursor-pointer hover:bg-gray-50"
                 >
                     <svg class="w-8 h-8 text-gray-400 mb-2" fill="none" stroke="currentColor" stroke-width="2"
                         viewBox="0 0 24 24">
@@ -84,7 +84,7 @@
                             d="M7 16V4a1 1 0 011-1h8a1 1 0 011 1v12m-5-4l-3 3m0 0l-3-3m3 3V9" />
                     </svg>
             
-                    <span id="fileText" class="text-sm text-gray-500 text-center">
+                    <span id="fileText" class="text-sm text-black text-center">
                         Drag & drop or click to upload photo <br>
                         JPG, PNG | Max 5MB
                     </span>
@@ -107,11 +107,11 @@
             {{-- Buttons --}}
             <div class=" flex justify-end gap-3 pt-4">
                 <a href="{{ route('reports.index') }}"
-                   class="btn-sub px-4 py-2 border rounded-md text-black-600 hover:bg-black-100">
+                   class="btn-sub px-4 py-2 rounded-md text-black-600 hover:text-white bg-red-100 hover:bg-red-500">
                     Cancel
                 </a>
                 <button type="submit"
-                        class="px-5 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
+                        class="px-5 py-2 bg-green-300 text-black hover:text-white rounded-md hover:bg-green-700">
                     Submit Report
                 </button>
             </div>
