@@ -19,7 +19,13 @@ protected $fillable = [
 'photo_before',
 'status', // pending, on_progress, done
 'category_id',
+'petugas_id',
+'proof_image',
+'proof_note',
+'processed_at' => 'datetime',
+'done_at'      => 'datetime',
 ];
+
 
 public function user()
 {

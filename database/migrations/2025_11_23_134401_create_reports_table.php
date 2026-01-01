@@ -12,13 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reports', function (Blueprint $table) {
-            $table->id();
-        $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+        $table->id();
+        $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
         $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+        $table->foreignId('petugas_id')->nullable()->constrained('users')->nullOnDelete();
         $table->string('title');
+        $table->string('location');
         $table->text('description')->nullable();
         $table->string('photo_before')->nullable();
-        $table->string('status')->default('pending');
+        $table->enum('status', ['pending', 'process', 'done'])->default('pending');
+
         $table->timestamps();
         });
     }

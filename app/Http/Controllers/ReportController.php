@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Report;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
@@ -11,22 +12,66 @@ class ReportController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function index()
+     {
+         $user = Auth::user();
+     
+         // ================= DASHBOARD DATA =================
+         $totalReports = Report::where('user_id', $user->id)->count();
+         $pendingReports = Report::where('user_id', $user->id)
+                                 ->where('status', 'pending')
+                                 ->count();
+     
+         $inProgressReports = Report::where('user_id', $user->id)
+                                    ->where('status', 'process')
+                                    ->count();
+     
+         $completedReports = Report::where('user_id', $user->id)
+                                   ->where('status', 'Done')
+                                   ->count();
+     
+         $recentReports = Report::where('user_id', $user->id)
+                                ->latest()
+                                ->take(5)
+                                ->get();
+     
+         // ================= LIST DATA =================
+         $reports = Report::where('user_id', $user->id)->latest()->paginate(10);
+     
+         return view('reports.index', compact(
+             'reports',
+             'totalReports',
+             'pendingReports',
+             'inProgressReports',
+             'completedReports',
+             'recentReports'
+         ));
+     }
+
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'required',
             'location' => 'required',
             'photo_before' => 'image|mimes:jpg,png,jpeg|max:2048'
         ]);
 
-        $path = $request->file('photo_before') ? $request->file('photo_before')->store('Report') : null;
+        $path = null;
+
+        if ($request->hasFile('photo_before')) {
+            $path = $request->file('photo_before')
+                            ->store('Report', 'public');
+        }
 
         $Report = Report::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
             'location' => $request->location,
+            'category_id' => $request->category_id,
             'photo_before' => $path,
             'status' => 'pending',
         ]);
@@ -35,11 +80,7 @@ class ReportController extends Controller
     }
 
 
-    public function index()
-    {   
-        $report= Report::with('user')->latest()->get();
-        return view('reports.index',compact('report'));
-    }
+
 
     public function show($id)
     {   
@@ -67,7 +108,8 @@ class ReportController extends Controller
     {
         $Report = Report::findOrFail($id);
         if ($Report->photo_before) {
-            Storage::delete($Report->photo_before);
+            Storage::disk('public')->delete($Report->photo_before);
+
         }
         $Report->delete();
 
