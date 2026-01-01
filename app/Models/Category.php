@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 
 class Category extends Model
 {

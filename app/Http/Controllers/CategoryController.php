@@ -48,9 +48,14 @@ class CategoryController extends Controller
         return "Category update: " . $id;
     }
     
-    public function destroy(string $id)
+    public function destroy(Category $category )
     {
-        return "Category delete: " . $id;
+        $category->delete();
+
+    return redirect()
+        ->route('categories.index')
+        ->with('success', 'Kategori berhasil dihapus');
+        
     }
     
 }
