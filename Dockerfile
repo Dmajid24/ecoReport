@@ -37,4 +37,4 @@ RUN sed -ri 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-availabl
 
 EXPOSE 80
 # Jalankan migrasi database, baru kemudian jalankan Apache
-CMD php artisan migrate --force && apache2-foreground
+CMD php artisan migrate --force && php artisan db:seed --force && apache2-foreground
