@@ -13,29 +13,32 @@ class UserSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
-        User::create([
+{
+    // SUPER ADMIN
+    User::updateOrCreate(
+        ['email' => 'superadmin@eco.com'], // Cek berdasarkan email
+        [
             'name' => 'Super Admin',
-            'email' => 'superadmin@eco.com',
             'password' => Hash::make('password123'),
             'role' => 'superadmin',
         ]);
 
-        // ADMIN
-        User::create([
+    // ADMIN
+    User::updateOrCreate(
+        ['email' => 'admin@eco.com'],
+        [
             'name' => 'Admin User',
-            'email' => 'admin@eco.com',
             'password' => Hash::make('password123'),
             'role' => 'admin',
         ]);
 
-        // PETUGAS
-        User::create([
+    // PETUGAS
+    User::updateOrCreate(
+        ['email' => 'petugas@eco.com'],
+        [
             'name' => 'Petugas Lapangan',
-            'email' => 'petugas@eco.com',
             'password' => Hash::make('password123'),
             'role' => 'petugas',
         ]);
-
-    }
+}
 }

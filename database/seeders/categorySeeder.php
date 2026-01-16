@@ -6,7 +6,7 @@ use App\Models\category;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class categorySeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -28,6 +28,9 @@ class categorySeeder extends Seeder
             ],
             [
                 'name' => 'Limbah Elektronik'
+            ],
+            [
+                'name' => 'Lainyaa'
             ]
         ];
 
