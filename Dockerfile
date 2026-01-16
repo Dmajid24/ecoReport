@@ -26,6 +26,7 @@ RUN composer install --no-dev --optimize-autoloader
 RUN php artisan view:clear
 RUN php artisan config:clear
 RUN php artisan config:cache
+RUN php artisan migrate --force
 RUN npm install
 RUN npm run build
 
@@ -35,5 +36,6 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # Apache document root
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
+
 
 EXPOSE 80
