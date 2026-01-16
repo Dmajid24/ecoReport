@@ -27,6 +27,8 @@ RUN npm install
 RUN npm run build
 
 # Permissions
+# Permissions yang lebih kuat
+RUN chmod -R 775 storage bootstrap/cache
 RUN chown -R www-data:www-data storage bootstrap/cache
 
 # Apache root
@@ -34,3 +36,5 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
 
 EXPOSE 80
+# Jalankan migrasi database, baru kemudian jalankan Apache
+CMD php artisan migrate --force && apache2-foreground
