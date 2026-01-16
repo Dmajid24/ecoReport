@@ -20,8 +20,13 @@
 
             {{-- FLASH MESSAGE --}}
             @if(session('success'))
-                <div class="mb-4 rounded-md bg-green-50 dark:bg-green-900 p-4 text-green-700 dark:text-green-300">
+                <div class="mb-4 rounded-md bg-green-900 p-4 text-green-300">
                     {{ session('success') }}
+                </div>
+            @endif
+            @if (session('danger'))
+                <div class="mb-4 rounded-md bg-red-900 p-4 text-red-200">
+                    {{ session('danger') }}
                 </div>
             @endif
 

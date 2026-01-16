@@ -8,22 +8,28 @@
         {{-- Summary --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
             <div class="bg-yellow-100 text-yellow-800 p-4 rounded">
-                <p class="text-sm">Pending</p>
+                <p class="text-sm">Pending Report</p>
                 <p class="text-2xl font-bold">
                     {{ $pendingReports->count() }}
                 </p>
             </div>
             <div class="bg-green-100 text-white-800 p-4 rounded">
-                <p class="text-sm">Other Process</p>
+                <p class="text-sm">Other Report</p>
                 <p class="text-2xl font-bold">
                     {{ $processReports->count()}}
 
                 </p>
             </div>
             <div class="bg-blue-100 text-blue-800 p-4 rounded">
-                <p class="text-sm">My Process</p>
+                <p class="text-sm">My Report</p>
                 <p class="text-2xl font-bold">
                     {{ $myReports->count() }}
+                </p>
+            </div>
+            <div class="bg-blue-100 text-blue-800 p-4 rounded">
+                <p class="text-sm">My Completed Report</p>
+                <p class="text-2xl font-bold">
+                    {{ $myDoneReports->count() }}
                 </p>
             </div>
         </div>
