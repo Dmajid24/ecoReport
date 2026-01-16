@@ -23,6 +23,8 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Install dependencies
 RUN composer install --no-dev --optimize-autoloader
+RUN php artisan config:clear
+RUN php artisan config:cache
 RUN npm install
 RUN npm run build
 
