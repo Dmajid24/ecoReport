@@ -11,12 +11,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // Tambahkan ini untuk memberitahu Laravel bahwa Render adalah proxy yang aman
+        $middleware->trustProxies(at: '*'); 
+
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,
             'localization' => \App\Http\Middleware\Localization::class,
         ]);
     })
-    
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
