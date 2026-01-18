@@ -33,21 +33,6 @@ class CategoryController extends Controller
         return redirect()->route('categories.index')->with('success', 'Category created successfully');
     }
     
-    public function show(string $id)
-    {
-        return "Category show: " . $id;
-    }
-    
-    public function edit(string $id)
-    {
-        return "Category edit: " . $id;
-    }
-    
-    public function update(Request $request, string $id)
-    {
-        return "Category update: " . $id;
-    }
-    
     public function destroy(Category $category )
     {
         $category->delete();
